@@ -1,0 +1,31 @@
+<div class="container">
+  <app-input (add)="addTodo($event)"></app-input>
+  <h2>To do</h2>
+  <div
+    cdkDropList
+    #todoList="cdkDropList"
+    [cdkDropListData]="todos"
+    [cdkDropListConnectedTo]="[doneList]"
+    class="list"
+    (cdkDropListDropped)="drop($event)">
+    <div class="box" *ngFor="let item of todos" cdkDrag><!--{{item.title | titlecase }}-->
+    <ng-template [ngIf]="todos">{{item.title | titlecase }}</ng-template>
+      <ng-template>{{item.title | titlecase }}</ng-template>
+    </div>
+  </div>
+</div>
+
+<div class="container today">
+  <h2>Today</h2>
+  <div
+    cdkDropList
+    #doneList="cdkDropList"
+    [cdkDropListData]="today"
+    [cdkDropListConnectedTo]="[todoList]"
+    class="list today"
+    (cdkDropListDropped)="drop($event)">
+    <div class="box" [class.complete]="item.complete" *ngFor="let item of today" cdkDrag>
+      <mat-checkbox [checked]="item?.complete" (change)="updateTodo(item)">{{item.title | titlecase }}</mat-checkbox>
+    </div>
+  </div>
+</div>

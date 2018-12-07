@@ -1,0 +1,8 @@
+<mat-form-field class="full-width">
+<input type="text"
+       matInput
+       [(ngModel)]="title"
+       placeholder="Enter your tasks"
+       (keypress)="onKeyPress($event)"
+/>
+</mat-form-field>
